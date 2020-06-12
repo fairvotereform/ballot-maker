@@ -120,7 +120,52 @@ class ControlForm extends React.Component {
   }
 }
 
-class ControlPanel extends React.Component {
+class Menu extends React.Component {
+  render() {
+    var visibility = "hide";
+
+    if (this.props.menuVisibility) {
+      visibility = "show";
+    }
+
+    return (
+      <div id="flyoutMenu"
+           onMouseDown={this.props.handleMouseDown}
+           className={visibility}>
+        <h2><a href="#">Home</a></h2>
+        <h2><a href="#">About</a></h2>
+        <h2><a href="#">Contact</a></h2>
+        <h2><a href="#">Search</a></h2>
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      visible: false
+    };
+
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  toggleMenu() {
+    this.setState({
+        visible: !this.state.visible
+    });
+  }
+
+  handleMouseDown(e) {
+    this.toggleMenu();
+
+    console.log("clicked");
+    e.stopPropagation();
+  }
 
   savePDF() {
     const input = document.getElementById('ballot');
@@ -136,21 +181,6 @@ class ControlPanel extends React.Component {
     input.style = existingStyle;
   }
 
-  render(){
-    return(
-      <div className="controlPanel">
-        <div className="controlTop">Edit the sample ballot:</div>
-        <ControlForm />
-        <button onClick={this.savePDF} className="controlBottom">
-          Download PDF
-        </button>
-      </div>
-    );
-  }
-}
-
-class App extends React.Component {
-
   render() {
 
     const place = "Anchorage, Alaska";
@@ -165,13 +195,30 @@ class App extends React.Component {
             FairVote Sample RCV Ballot
           </div>
           <div className="subtitle_text">
-            Use the panel on the right to generate a sample single-page,
-            grid-style ballot for a ranked-choice voting election.
+            Edit and download a sample single-page,
+            grid ballot for a ranked choice election.
           </div>
         </div>
-        <div className="row_wrap_grid">
+        <br/>
+        <Menu
+          handleMouseDown={this.handleMouseDown}
+          menuVisibility={this.state.visible}
+        />
+        <div className="col_flex">
+          <div className="row_wrap_flex">
+            <button
+              onClick={this.handleMouseDown}
+              id="roundButton">
+              Edit Ballot
+            </button>
+            <button
+              onClick={this.savePDF}
+              id="roundButton">
+              Download PDF
+            </button>
+          </div>
+          <br/>
           <Ballot place={place} title={title} date={date} position={position}/>
-          <ControlPanel/>
         </div>
       </div>
     );
