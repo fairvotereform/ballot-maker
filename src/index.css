@@ -8,17 +8,32 @@
   src: url(./fonts/Overpass-ExtraLight.ttf) format('truetype');
 }
 
-.row_wrap_flex {
+:root {
+  --grid-column1: 2.2in;
+  --grid-column2: 6.075in;
+  --grid-row1: 1.1in;
+
+  --ballot-width: 8.5in;
+  --ballot-height: 10.94in;
+}
+
+.row_flex {
+  margin: auto;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  width: 400px;
+  flex-flow: row nowrap;
 }
 
 .col_flex {
   display: flex;
   flex-flow: column;
   align-items: center;
+}
+
+.col_flex_botMarg {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding-bottom: 5px;
 }
 
 .title_text{
@@ -36,24 +51,68 @@
   text-align: center;
 }
 
+.ballotContainer{
+  position: relative;
+}
+
+.topBallot {
+
+}
+
+.bottomBallot {
+  /* font: 16px 'Overpass', sans-serif;
+  line-height: 106%;
+  width: var(--ballot-width);
+  min-width: var(--ballot-width);
+  height: var(--ballot-height);
+  min-height: var(--ballot-height);
+  margin: auto;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  border-width: 1px;
+  border-color: #aaa;
+  border-style: none solid solid solid;
+  border-radius: 1px; */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* .bottomBallot > * {
+  margin-right: 10px;
+  margin-left: 10px;
+} */
+
 .ballot {
   font: 16px 'Overpass', sans-serif;
   line-height: 106%;
-  width: 8.5in;
-  min-width: 8.5in;
-  height: 10.94in;
-  min-height: 10.94in;
+  width: var(--ballot-width);
+  min-width: var(--ballot-width);
+  height: var(--ballot-height);
+  min-height: var(--ballot-height);
   margin: auto;
+  background-color: #FFFFFF;
   font-size: 16px;
-  border-width: 3px;
-  border-color: rgb(112,112,112);
-  border-style: solid;
-  border-radius: 5px;
+  border-width: 1px;
+  border-color: #aaa;
+  border-style: none solid solid solid;
+  border-style: 1px;
+  border-radius: 1px;
 }
 
-.ballot > div {
+.ballot > * {
   margin-right: 10px;
   margin-left: 10px;
+}
+
+.strip {
+  width: 80px;
+}
+
+.stripFiller {
+  width: 80px;
+  height: var(--ballot-height);
+  background-color: white;
 }
 
 #fv > img {
@@ -120,7 +179,7 @@
     grid-column-end: 2;
     grid-template-columns: 1fr 1fr 1fr;
     background-color: #E7E8E9;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 .images .imgwrap {
@@ -141,105 +200,234 @@
     max-height: auto;
 }
 
-#roundButton {
+.sideBarCandidateButtonContainer{
+  margin-bottom: 16px;
+}
+
+#contestAddButton {
   font-family: Poppins;
+  font-size: 16px;
   font-weight: bold;
-  background-color: #9768d1;
+  background-color: #FFFFFF;
   margin-bottom: 0px;
-  width: 150px;
-  height: 50px;
+  margin-top: 5px;
+  padding-left: 1px;
+  width: calc(var(--grid-column1) + var(--grid-column2));
+  height: 28px;
+  border: 1px solid transparent;
   border-radius: 5%;
-  border: 3px solid #553285;
+  border: 2px solid black;
   outline: none;
   transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
 }
 
-#roundButton:hover {
-  background-color: #96D9FF;
-  cursor: pointer;
-  border-color: #003557;
-  transform: scale(1.2, 1.2);
-}
-
-#roundButton:active {
+#contestAddButton:active {
   border-color: #003557;
   background-color: #FFF;
 }
 
-#flyoutMenu {
-  width: 100vw;
-  height: 65vh;
-  background-color: #9768d1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  transition: transform .3s
-              cubic-bezier(0, .52, 0, 1);
-  overflow: scroll;
-  z-index: 1000;
+#contestAddButton:hover {
+  background-color: #96D9FF;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
 }
 
-#flyoutMenu.hide {
-  transform: translate3d(0, -65vw, 0);
-}
-
-#flyoutMenu.show {
-  transform: translate3d(0, 0vw, 0);
-  overflow: hidden;
-}
-
-#flyoutMenu h2 a {
-  color: #333;
-  margin-left: 15px;
-  text-decoration: none;
-}
-
-#flyoutMenu h2 a:hover {
-  text-decoration: underline;
-}
-
-/* .controlPanel {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  min-width: 320px;
-}
-
-.controlPanel > * {
-  background-color: #9768d1;
-  border-color: #9768d1;
-  border-width: 3px;
+#sideBarCandidateButtonRemove {
   font-family: Poppins;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #FFFFFF;
+  margin-bottom: 0px;
+  width: 40px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 5%;
+  border: 2px solid black;
+  outline: none;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
 }
 
-.controlTop {
+#sideBarCandidateButtonRemove:active {
+  border-color: #003557;
+  background-color: #FFF;
+}
+
+#sideBarCandidateButtonRemove:hover {
+  background-color: #96D9FF;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
+}
+
+#sideBarCandidateButtonAdd {
+  font-family: Poppins;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: #FFFFFF;
+  margin-bottom: 0px;
+  width: 80px;
+  height: 35px;
+  border: 1px solid transparent;
+  border-radius: 5%;
+  border: 2px solid black;
+  outline: none;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+}
+
+#sideBarCandidateButtonAdd:active {
+  border-color: #003557;
+  background-color: #FFF;
+}
+
+#sideBarCandidateButtonAdd:hover {
+  background-color: #96D9FF;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
+}
+
+#sideBarContestButton {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #FFFFFF;
+  margin-bottom: 0px;
+  width: 40px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 5%;
+  border: 2px solid black;
+  outline: none;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+}
+
+#sideBarContestButton:active {
+  border-color: #003557;
+  background-color: #FFF;
+}
+
+#sideBarContestButton:hover {
+  background-color: #96D9FF;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
+}
+
+#bigButton {
+  font-family: Poppins;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  margin-bottom: 0px;
+  width: 150px;
+  height: 40px;
+  border: 1px solid transparent;
+  border-radius: 5%;
+  border: 1px solid #553285;
+  outline: none;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+}
+
+#bigButton:hover {
+  background-color: #96D9FF;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
+}
+
+#bigButton:active {
+  border-color: #003557;
+  background-color: #FFF;
+}
+
+#selectedBigButton {
+  font-family: Poppins;
+  background-color: #9768d1;
+  margin-bottom: 0px;
+  width: 150px;
+  height: 40px;
+  border-radius: 5%;
+  border: 3px solid #553285;
+  outline: none;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+  background-color: #96D9FF;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
+}
+
+.contestTitle {
+  padding: 5px;
+  background-color: #D0D3D4;
+  font-weight: bold;
+  border-left: 1px solid black;
+  border-top: 3px solid black;
+  border-right: 1px solid black;
+}
+
+.contestBody {
+  display: grid;
+  grid-template-columns: var(--grid-column1) var(--grid-column2);
+  grid-template-rows: var(--grid-row1) auto;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.contest {
+  padding-top: 10px;
+}
+
+.contestInstructions {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  padding: 5px;
+  background-color: #E7E8E9;
+  font-size: 14px;
+  border-left: 1px solid black;
+}
+
+.longOrdinal {
+  margin: auto;
+  flex-grow: 2;
   text-align: center;
-  border-style: solid none none none;
-  border-radius: 10px 10px 0px 0px;
+  padding: 5px;
+  font-size: 14px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
-.controlBottom {
+.shortOrdinal {
+  margin: auto;
+  flex-grow: 1;
   text-align: center;
-  background-color: #553285;
-  border-width: 2px;
-  border-color: black;
-  border-style: solid solid solid solid;
-  border-radius: 0px 0px 10px 10px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.formField {
-  text-align:center;
+.contestCandidateContainer {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
 }
 
-input, label {
-    border-width: 0px;
-    border-radius: 10px;
-    font-size: 18px;
-    margin: auto;
-    display: block;
+.contestCandidateOuter {
+  border-top: 2px solid black;
+  border-left: 1px solid black;
+  width: var(--grid-column1);
 }
 
-input:focus{
-    outline: none;
-} */
+.contestCandidateInnerPreview {
+  padding-left: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.contestCandidateInnerEdit {
+  padding-left: 5px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.candidateName {
+  font-weight: bold;
+}
