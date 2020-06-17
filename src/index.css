@@ -90,6 +90,7 @@
   min-width: var(--ballot-width);
   height: var(--ballot-height);
   min-height: var(--ballot-height);
+  max-height: var(--ballot-height);
   margin: auto;
   background-color: #FFFFFF;
   font-size: 16px;
