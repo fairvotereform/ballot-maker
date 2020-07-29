@@ -26,7 +26,7 @@ class App extends React.Component {
         includeInstructions: true,
         contests: [
           {
-            position: "President",
+            position: "Council President",
             n_to_elect: "One",
             candidates: [
               {name: "Olivia Offerman", party: "Orange Party"},
