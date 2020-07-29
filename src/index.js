@@ -20,7 +20,7 @@ class App extends React.Component {
       ballotHeight: 0,
       visibleMenu: true,
       ballotState: {
-        place: "Anytown, USA",
+        place: "Somewhere, USA",
         date: "April 35, 2020",
         electionName: "Council Election",
         includeInstructions: true,
