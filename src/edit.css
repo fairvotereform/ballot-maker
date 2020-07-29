@@ -1,0 +1,122 @@
+
+.editBallot{
+  min-height: var(--ballot-height);
+}
+
+#sideButtonWide{
+  font-family: Poppins;
+  font-weight: normal;
+  font-size: 12px;
+  background-color: #C297DB;
+  border-radius: 5%;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  outline: none;
+  min-height: 23px;
+  width: var(--sidebar-button-wide-width);
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+}
+
+#sideButtonWide:active {
+  font-weight: normal;
+  border-color: #C297DB;
+  background-color: #FFF;
+}
+
+#sideButtonWide:hover {
+  font-weight: bold;
+  background-color: #F88231;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
+}
+
+#sideButtonNarrow{
+  font-family: Poppins;
+  font-size: 12px;
+  background-color: #C297DB;
+  border-radius: 5%;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  outline: none;
+  min-height: 25px;
+  width: var(--sidebar-button-narrow-width);
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+}
+
+#sideButtonNarrow:active {
+  border-color: #003557;
+  background-color: #C297DB;
+}
+
+#sideButtonNarrow:hover {
+  font-weight: bold;
+  background-color: #F88231;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
+}
+
+.addButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#contestAddButton {
+  font-family: Poppins;
+  font-size: 13px;
+  background-color: #C297DB;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  padding-left: 1px;
+  width: 300px;
+  /*width: calc(var(--contest-grid-column1) + var(--contest-grid-column2));*/
+  height: 22px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-radius: 2px;
+  outline: none;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+}
+
+#contestAddButton:active {
+  font-weight: bold;
+  border-color: #FFF275;
+  background-color: #C297DB;
+}
+
+#contestAddButton:hover {
+  font-weight: bold;
+  background-color: #F88231;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
+}
+
+.editForm {
+  /*background-color: #FFFF66; brighter yellow*/
+  background-color: rgb(251, 178, 49);
+  border-radius: 2px;
+  border: 1px solid black;
+}
+
+.contestCandidateOuterEdit {
+  border-top: 2px solid black;
+  border-left: 1px solid black;
+  width: var(--contest-grid-column1);
+  height: 40px;
+}
+
+.contestCandidateInnerEdit {
+  padding-left: 5px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  height: 40px;
+}

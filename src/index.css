@@ -4,17 +4,33 @@
 }
 
 @font-face {
+  font-family: 'Poppins-SemiBold';
+  src: url(./fonts/Poppins-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
   font-family: 'Overpass';
   src: url(./fonts/Overpass-ExtraLight.ttf) format('truetype');
 }
 
 :root {
-  --grid-column1: 2.2in;
-  --grid-column2: 6.075in;
-  --grid-row1: 1.1in;
+  --contest-grid-column1: 2.2in;
+  --contest-grid-column2: 6.075in;
+  --contest-rank-header-height: 1.10in;
+  --contest-candidate-row-height-preview: 0.43in;
+  --contest-candidate-row-height-edit: 0.43in;
 
-  --ballot-width: 8.5in;
+  --ballot-width-preview: 816px;
+  --ballot-width-edit: 818px;
   --ballot-height: 10.94in;
+
+  --sidebar-width-preview: 170px;
+  --sidebar-width-edit: 170px;
+  --sidebar-button-wide-width: 130px;
+  --sidebar-button-narrow-width: 95px;
+
+  --filler-col-width: 5px;
+  --measure-col-width: 165px;
 }
 
 .row_flex {
@@ -56,96 +72,90 @@
 }
 
 .topBallot {
-
-}
-
-.bottomBallot {
-  /* font: 16px 'Overpass', sans-serif;
-  line-height: 106%;
-  width: var(--ballot-width);
-  min-width: var(--ballot-width);
-  height: var(--ballot-height);
-  min-height: var(--ballot-height);
-  margin: auto;
-  font-size: 16px;
-  background-color: #FFFFFF;
-  border-width: 1px;
-  border-color: #aaa;
-  border-style: none solid solid solid;
-  border-radius: 1px; */
   position: absolute;
   top: 0;
   left: 0;
 }
 
-/* .bottomBallot > * {
-  margin-right: 10px;
-  margin-left: 10px;
-} */
+.bottomBallot {
+}
 
-.ballot {
+.ballotPiece{
+  display: grid;
+  grid-template-columns: var(--sidebar-width-edit) var(--ballot-width-edit) var(--sidebar-width-edit);
+}
+
+.ballotPieceLeft{
+  grid-column: 1 / span 1;
+  padding-right: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.ballotPieceRight{
+  grid-column: 3 / span 1;
+}
+
+.ballotPieceMid{
+  grid-column: 2 / span 1;
+  border-right: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+}
+
+.ballotPieceMid > * {
   font: 16px 'Overpass', sans-serif;
   line-height: 106%;
-  width: var(--ballot-width);
-  min-width: var(--ballot-width);
-  height: var(--ballot-height);
-  min-height: var(--ballot-height);
-  max-height: var(--ballot-height);
-  margin: auto;
-  background-color: #FFFFFF;
   font-size: 16px;
-  border-width: 1px;
-  border-color: #aaa;
-  border-style: none solid solid solid;
-  border-style: 1px;
-  border-radius: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.ballot > * {
-  margin-right: 10px;
-  margin-left: 10px;
+#bigButton {
+  font-family: Poppins;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  margin-bottom: 0px;
+  width: 150px;
+  height: 40px;
+  border: 1px solid transparent;
+  border-radius: 5%;
+  border: 1px solid #553285;
+  outline: none;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
 }
 
-.strip {
-  width: 80px;
+#bigButton:hover {
+  background-color: #C297DB;
+  cursor: pointer;
+  border-color: #003557;
+  transform: scale(1.1, 1.1);
 }
 
-.stripFiller {
-  width: 80px;
-  height: var(--ballot-height);
-  background-color: white;
+#bigButton:active {
+  border-color: #003557;
+  background-color: #C297DB;
 }
 
-#fv > img {
-    max-width: 100%;
-    max-height: 100%;
+#selectedBigButton {
+  font-family: Poppins;
+  background-color: #9768d1;
+  margin-bottom: 0px;
+  width: 150px;
+  height: 40px;
+  border-radius: 5%;
+  border: 3px solid #553285;
+  outline: none;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+  background-color: #C297DB;
+  cursor: pointer;
+  border-color: #553285;
+  transform: scale(1.1, 1.1);
 }
 
-.officialballot {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.election {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    display: grid;
-    grid-template-rows: 1fr 25px 20px 20px;
-    margin-left: 10px;
-}
-
-.line2 {
-    font-size: 15px;
-    text-align: right;
-    align-self: end;
-}
-
-.line1{
-    font-size: 20px;
-    text-align: right;
+.instructions{
+  margin-bottom: 0px;
 }
 
 .topInstructions {
@@ -163,15 +173,6 @@
     background-color: black;
     color: white;
     padding: 10px;
-}
-
-.instructions {
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
-    padding: 5px;
-    background-color: #E7E8E9;
-    font-size: 14px;
 }
 
 .images {
@@ -201,160 +202,36 @@
     max-height: auto;
 }
 
-.sideBarCandidateButtonContainer{
-  margin-bottom: 16px;
+#fv > img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
-#contestAddButton {
-  font-family: Poppins;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #FFFFFF;
-  margin-bottom: 0px;
-  margin-top: 5px;
-  padding-left: 1px;
-  width: calc(var(--grid-column1) + var(--grid-column2));
-  height: 28px;
-  border: 1px solid transparent;
-  border-radius: 5%;
-  border: 2px solid black;
-  outline: none;
-  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+.officialballot {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    margin-top: 10px;
 }
 
-#contestAddButton:active {
-  border-color: #003557;
-  background-color: #FFF;
+.election {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-rows: 1fr 25px 20px 20px;
+    margin-left: 10px;
 }
 
-#contestAddButton:hover {
-  background-color: #96D9FF;
-  cursor: pointer;
-  border-color: #003557;
-  transform: scale(1.1, 1.1);
+.line2 {
+    font-size: 15px;
+    text-align: right;
+    align-self: end;
 }
 
-#sideBarCandidateButtonRemove {
-  font-family: Poppins;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #FFFFFF;
-  margin-bottom: 0px;
-  width: 40px;
-  height: 28px;
-  border: 1px solid transparent;
-  border-radius: 5%;
-  border: 2px solid black;
-  outline: none;
-  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
-}
-
-#sideBarCandidateButtonRemove:active {
-  border-color: #003557;
-  background-color: #FFF;
-}
-
-#sideBarCandidateButtonRemove:hover {
-  background-color: #96D9FF;
-  cursor: pointer;
-  border-color: #003557;
-  transform: scale(1.1, 1.1);
-}
-
-#sideBarCandidateButtonAdd {
-  font-family: Poppins;
-  font-size: 10px;
-  font-weight: bold;
-  background-color: #FFFFFF;
-  margin-bottom: 0px;
-  width: 80px;
-  height: 35px;
-  border: 1px solid transparent;
-  border-radius: 5%;
-  border: 2px solid black;
-  outline: none;
-  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
-}
-
-#sideBarCandidateButtonAdd:active {
-  border-color: #003557;
-  background-color: #FFF;
-}
-
-#sideBarCandidateButtonAdd:hover {
-  background-color: #96D9FF;
-  cursor: pointer;
-  border-color: #003557;
-  transform: scale(1.1, 1.1);
-}
-
-#sideBarContestButton {
-  font-family: Poppins;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #FFFFFF;
-  margin-bottom: 0px;
-  width: 40px;
-  height: 28px;
-  border: 1px solid transparent;
-  border-radius: 5%;
-  border: 2px solid black;
-  outline: none;
-  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
-}
-
-#sideBarContestButton:active {
-  border-color: #003557;
-  background-color: #FFF;
-}
-
-#sideBarContestButton:hover {
-  background-color: #96D9FF;
-  cursor: pointer;
-  border-color: #003557;
-  transform: scale(1.1, 1.1);
-}
-
-#bigButton {
-  font-family: Poppins;
-  font-size: 16px;
-  background-color: #FFFFFF;
-  margin-bottom: 0px;
-  width: 150px;
-  height: 40px;
-  border: 1px solid transparent;
-  border-radius: 5%;
-  border: 1px solid #553285;
-  outline: none;
-  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
-}
-
-#bigButton:hover {
-  background-color: #96D9FF;
-  cursor: pointer;
-  border-color: #003557;
-  transform: scale(1.1, 1.1);
-}
-
-#bigButton:active {
-  border-color: #003557;
-  background-color: #FFF;
-}
-
-#selectedBigButton {
-  font-family: Poppins;
-  background-color: #9768d1;
-  margin-bottom: 0px;
-  width: 150px;
-  height: 40px;
-  border-radius: 5%;
-  border: 3px solid #553285;
-  outline: none;
-  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
-  background-color: #96D9FF;
-  cursor: pointer;
-  border-color: #003557;
-  transform: scale(1.1, 1.1);
+.line1{
+    font-family: Poppins-SemiBold;
+    font-size: 20px;
+    text-align: right;
 }
 
 .contestTitle {
@@ -366,12 +243,26 @@
   border-right: 1px solid black;
 }
 
-.contestBody {
+.contestHeaders {
   display: grid;
-  grid-template-columns: var(--grid-column1) var(--grid-column2);
-  grid-template-rows: var(--grid-row1) auto;
+  grid-template-columns: var(--contest-grid-column1) var(--contest-grid-column2);
+  grid-template-rows: var(--contest-rank-header-height);
   border-right: 1px solid black;
-  border-bottom: 1px solid black;
+}
+
+.candidateRow {
+  display: grid;
+  grid-template-columns: var(--contest-grid-column1) var(--contest-grid-column2);
+  grid-template-rows: var(--contest-candidate-row-height-edit);
+  border-right: 1px solid black;
+}
+
+.candidateInfo {
+  grid-column: 1 / span 1;
+}
+
+.bubbleGridRow {
+  grid-column: 2 / span 1;
 }
 
 .contest {
@@ -411,24 +302,9 @@
   grid-row: 2 / span 1;
 }
 
-.contestCandidateOuter {
-  border-top: 2px solid black;
-  border-left: 1px solid black;
-  width: var(--grid-column1);
-}
-
-.contestCandidateInnerPreview {
-  padding-left: 5px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-}
-
-.contestCandidateInnerEdit {
-  padding-left: 5px;
-  padding-bottom: 0px;
-  padding-top: 0px;
-}
-
 .candidateName {
   font-weight: bold;
 }
+
+@import url("edit.css");
+@import url("preview.css");
